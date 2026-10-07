@@ -1,16 +1,11 @@
-# Core Machine Learning & Deep Learning
-tensorflow>=2.18.0
+# Deep Learning & Machine Learning (CPU-optimized for Streamlit Cloud)
+tensorflow-cpu>=2.16.1
 numpy>=1.26.0
 pandas>=2.2.0
 scikit-learn>=1.5.0
-
-# Visualization
-matplotlib>=3.9.0
-seaborn>=0.13.0
-
-# Persistence & Utilities
 joblib>=1.4.0
-python-pptx>=1.0.0
 
-# Web Application Demo
+# Visualization & Web Application
+matplotlib>=3.8.0
+seaborn>=0.13.0
 streamlit>=1.35.0
