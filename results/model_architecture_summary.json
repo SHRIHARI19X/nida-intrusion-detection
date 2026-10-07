@@ -1,0 +1,57 @@
+{
+    "model_type": "Dense Autoencoder",
+    "framework": "TensorFlow 2.21.0 / Keras 3.15.1",
+    "input_dimension": 77,
+    "latent_dimension": 16,
+    "output_dimension": 77,
+    "encoder_layers": [
+        {
+            "name": "encoder_1",
+            "units": 64,
+            "activation": "relu"
+        },
+        {
+            "name": "encoder_2",
+            "units": 32,
+            "activation": "relu"
+        },
+        {
+            "name": "latent",
+            "units": 16,
+            "activation": "relu"
+        }
+    ],
+    "decoder_layers": [
+        {
+            "name": "decoder_1",
+            "units": 32,
+            "activation": "relu"
+        },
+        {
+            "name": "decoder_2",
+            "units": 64,
+            "activation": "relu"
+        },
+        {
+            "name": "reconstruction",
+            "units": 77,
+            "activation": "linear"
+        }
+    ],
+    "optimizer": "Adam",
+    "loss": "mean_squared_error",
+    "total_parameters": 15261,
+    "trainable_parameters": 15261,
+    "non_trainable_parameters": 0,
+    "input_shape": [
+        null,
+        77
+    ],
+    "output_shape": [
+        null,
+        77
+    ],
+    "architecture_verified": true,
+    "untrained_model_path": "E:\\NIDA\\models\\autoencoder_untrained.keras",
+    "note": "Dense Autoencoder chosen for tabular NSL-KDD data. Learns normal traffic representation; high reconstruction error signals anomalous/attack traffic at inference time."
+}

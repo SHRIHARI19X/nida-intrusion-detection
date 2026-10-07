@@ -1,0 +1,78 @@
+{
+    "phase": "Phase 9 \u2014 Intrusion Detection on Unseen KDDTest+",
+    "antigravity_ai_model": "Gemini 3.8 Flash Medium",
+    "dl_model": "Trained Dense Autoencoder",
+    "test_sample_count": 22544,
+    "processed_feature_count": 77,
+    "threshold": 0.1290749317,
+    "threshold_method": "95th_percentile",
+    "predicted_normal_count": 12686,
+    "predicted_intrusion_count": 9858,
+    "percentage_predicted_normal": 56.2722,
+    "percentage_predicted_intrusion": 43.7278,
+    "actual_normal_count": 9711,
+    "actual_attack_count": 12833,
+    "model_path": "E:\\NIDA\\models\\autoencoder.keras",
+    "preprocessor_path": "E:\\NIDA\\models\\preprocessor.joblib",
+    "reconstruction_error_stats": {
+        "min": 0.00093456,
+        "max": 447.47127006,
+        "mean": 0.56485294,
+        "median": 0.07274856,
+        "std": 9.05593365
+    },
+    "attack_category_detection_breakdown": {
+        "Normal": {
+            "total_records": 9711,
+            "predicted_normal": 9322,
+            "predicted_normal_pct": 95.99,
+            "predicted_intrusion": 389,
+            "predicted_intrusion_pct": 4.01,
+            "mean_reconstruction_error": 0.03854
+        },
+        "DoS": {
+            "total_records": 7458,
+            "predicted_normal": 1166,
+            "predicted_normal_pct": 15.63,
+            "predicted_intrusion": 6292,
+            "predicted_intrusion_pct": 84.37,
+            "mean_reconstruction_error": 0.651147
+        },
+        "Probe": {
+            "total_records": 2421,
+            "predicted_normal": 447,
+            "predicted_normal_pct": 18.46,
+            "predicted_intrusion": 1974,
+            "predicted_intrusion_pct": 81.54,
+            "mean_reconstruction_error": 0.746501
+        },
+        "R2L": {
+            "total_records": 2887,
+            "predicted_normal": 1728,
+            "predicted_normal_pct": 59.85,
+            "predicted_intrusion": 1159,
+            "predicted_intrusion_pct": 40.15,
+            "mean_reconstruction_error": 1.270411
+        },
+        "U2R": {
+            "total_records": 67,
+            "predicted_normal": 23,
+            "predicted_normal_pct": 34.33,
+            "predicted_intrusion": 44,
+            "predicted_intrusion_pct": 65.67,
+            "mean_reconstruction_error": 30.277333
+        }
+    },
+    "integrity_audit": {
+        "nan_errors": 0,
+        "inf_errors": 0,
+        "negative_errors": 0,
+        "kddtest_fitted_preprocessing": false,
+        "kddtest_trained_autoencoder": false,
+        "test_labels_used_for_threshold": false,
+        "test_labels_used_to_modify_predictions": false,
+        "test_data_modified": false,
+        "threshold_source": "Phase 8 normal validation errors only",
+        "test_based_optimization": false
+    }
+}

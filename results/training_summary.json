@@ -1,0 +1,31 @@
+{
+    "phase": "Phase 6 \u2014 Autoencoder Training",
+    "model_type": "Dense Autoencoder",
+    "framework": "TensorFlow 2.21.0",
+    "input_dimension": 77,
+    "architecture": "77 -> 64 -> 32 -> 16 -> 32 -> 64 -> 77",
+    "optimizer": "Adam",
+    "loss_function": "mean_squared_error",
+    "batch_size": 256,
+    "max_epochs": 50,
+    "epochs_actually_trained": 13,
+    "early_stopping": {
+        "monitor": "val_loss",
+        "patience": 5,
+        "restore_best_weights": true,
+        "stopped_early": true
+    },
+    "training_samples": 53874,
+    "validation_samples": 13469,
+    "final_training_loss": 0.0360401,
+    "final_validation_loss": 0.34348187,
+    "best_validation_loss": 0.31388706,
+    "best_epoch": 8,
+    "training_duration_seconds": 5.56,
+    "training_device": "CPU",
+    "random_state": 42,
+    "normal_only_training": true,
+    "test_data_used_in_training": false,
+    "trained_model_path": "E:\\NIDA\\models\\autoencoder.keras",
+    "loss_curve_path": "E:\\NIDA\\results\\loss_curve.png"
+}

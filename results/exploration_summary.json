@@ -1,0 +1,68 @@
+{
+    "dataset_files": {
+        "train_file": "E:\\NIDA\\data\\KDDTrain+.txt",
+        "test_file": "E:\\NIDA\\data\\KDDTest+.txt"
+    },
+    "shapes": {
+        "train_rows": 125973,
+        "train_columns": 43,
+        "test_rows": 22544,
+        "test_columns": 43
+    },
+    "features": {
+        "total_traffic_features": 41,
+        "categorical_features": [
+            "protocol_type",
+            "service",
+            "flag"
+        ],
+        "numerical_features_count": 38,
+        "metadata_columns": [
+            "label",
+            "difficulty"
+        ]
+    },
+    "missing_values": {
+        "train_missing_total": 0,
+        "test_missing_total": 0,
+        "status": "No missing values detected"
+    },
+    "duplicates": {
+        "train_duplicates": 0,
+        "test_duplicates": 0
+    },
+    "class_distribution": {
+        "train": {
+            "normal": 67343,
+            "attack": 58630,
+            "normal_pct": 53.46,
+            "attack_pct": 46.54
+        },
+        "test": {
+            "normal": 9711,
+            "attack": 12833,
+            "normal_pct": 43.08,
+            "attack_pct": 56.92
+        }
+    },
+    "attack_categories": {
+        "train": {
+            "Normal": 67343,
+            "DoS": 45927,
+            "Probe": 11656,
+            "R2L": 995,
+            "U2R": 52
+        },
+        "test": {
+            "Normal": 9711,
+            "DoS": 7458,
+            "R2L": 2887,
+            "Probe": 2421,
+            "U2R": 67
+        }
+    },
+    "visualizations": [
+        "results/label_distribution.png",
+        "results/attack_category_distribution.png"
+    ]
+}

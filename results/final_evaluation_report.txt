@@ -1,0 +1,57 @@
+================================================================================
+FINAL MODEL EVALUATION REPORT
+================================================================================
+PROJECT: Network Intrusion Detection Using Autoencoder
+MODEL: Trained Dense Autoencoder (77 -> 64 -> 32 -> 16 -> 32 -> 64 -> 77)
+TEST DATASET: NSL-KDD KDDTest+ (completely unseen)
+TEST SAMPLES: 22,544 (Normal: 9,711, Attack: 12,833)
+THRESHOLD: 0.12907493 (Derived exclusively from Phase 8 normal validation errors)
+
+--------------------------------------------------------------------------------
+CONFUSION MATRIX
+--------------------------------------------------------------------------------
+True Negatives  (TN) : 9,322  (Normal correctly identified)
+False Positives (FP) : 389  (Normal incorrectly flagged as intrusion)
+False Negatives (FN) : 3,364  (Attack missed as normal)
+True Positives  (TP) : 9,469  (Attack correctly detected)
+Total Records Check  : 22,544 / 22,544
+
+--------------------------------------------------------------------------------
+CLASSIFICATION METRICS
+--------------------------------------------------------------------------------
+Accuracy             : 0.833526 (83.35%)
+Precision            : 0.960540 (96.05%)
+Recall (Sensitivity) : 0.737863 (73.79%)
+F1 Score             : 0.834604 (83.46%)
+ROC-AUC Score        : 0.956960 (95.70%)
+
+--------------------------------------------------------------------------------
+RATES & SPECIFICITY
+--------------------------------------------------------------------------------
+False Positive Rate  : 0.040058 (4.01%)
+Specificity (TNR)    : 0.959942 (95.99%)
+Attack Detection Rate: 0.737863 (73.79%)
+
+--------------------------------------------------------------------------------
+PER-ATTACK-CATEGORY RESULTS
+--------------------------------------------------------------------------------
+DoS    -> Total: 7,458 | Detected: 6,292 | Missed: 1,166 | Recall:  84.37% | Mean MSE: 0.651147
+Probe  -> Total: 2,421 | Detected: 1,974 | Missed:   447 | Recall:  81.54% | Mean MSE: 0.746501
+R2L    -> Total: 2,887 | Detected: 1,159 | Missed: 1,728 | Recall:  40.15% | Mean MSE: 1.270411
+U2R    -> Total:    67 | Detected:    44 | Missed:    23 | Recall:  65.67% | Mean MSE: 30.277333
+
+--------------------------------------------------------------------------------
+RECONSTRUCTION ERROR DISTRIBUTION
+--------------------------------------------------------------------------------
+Normal Traffic -> Mean: 0.038540, Median: 0.003158, P95: 0.112638, Max: 63.669305
+Attack Traffic -> Mean: 0.963125, Median: 0.457592, P95: 1.578233, Max: 447.471270
+
+--------------------------------------------------------------------------------
+DATA INTEGRITY & METHODOLOGICAL AUDIT
+--------------------------------------------------------------------------------
+✓ KDDTest+ was never used to fit preprocessing or train the Autoencoder
+✓ Threshold was derived solely from normal validation records in Phase 8
+✓ No test-based hyperparameter tuning or threshold modification occurred
+✓ Continuous reconstruction errors were used to calculate ROC-AUC
+✓ Manual formula checks verified exact equivalence with scikit-learn
+================================================================================

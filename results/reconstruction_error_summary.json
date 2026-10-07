@@ -1,0 +1,36 @@
+{
+    "phase": "Phase 7 \u2014 Reconstruction Error Analysis",
+    "model_used": "models/autoencoder.keras",
+    "model_path": "E:\\NIDA\\models\\autoencoder.keras",
+    "input_dimension": 77,
+    "validation_sample_count": 13469,
+    "statistics": {
+        "min": 0.00095896,
+        "max": 3571.98538127,
+        "mean": 0.31388704,
+        "median": 0.00756771,
+        "std": 30.80041781,
+        "p90": 0.06654559,
+        "p95": 0.12907493,
+        "p99": 0.42683802
+    },
+    "integrity": {
+        "nan_count": 0,
+        "inf_count": 0,
+        "negative_count": 0,
+        "status": "CLEAN"
+    },
+    "loss_gap_analysis": {
+        "train_error_mean_sample": 0.042678,
+        "val_error_mean": 0.313887,
+        "ratio_val_to_train": 7.35,
+        "note": "Gap explained by heterogeneous normal traffic distribution and StandardScaler fitted on training split only. Not a code error. Phase 11 will analyse impact on detection performance."
+    },
+    "data_source": "Normal validation records from KDDTrain+ (20% split, random_state=42)",
+    "threshold_note": "Threshold NOT set here \u2014 deferred to Phase 8.",
+    "artifacts": {
+        "error_array": "E:\\NIDA\\results\\validation_reconstruction_errors.npy",
+        "histogram": "E:\\NIDA\\results\\reconstruction_error_validation.png",
+        "boxplot": "E:\\NIDA\\results\\reconstruction_error_boxplot.png"
+    }
+}

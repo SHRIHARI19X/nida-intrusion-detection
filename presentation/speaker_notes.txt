@@ -1,0 +1,95 @@
+================================================================================
+SPEAKER NOTES — NETWORK INTRUSION DETECTION USING AUTOENCODER
+MSc Computer Science (AI & ML) Project Presentation & Viva Guide
+================================================================================
+
+--------------------------------------------------------------------------------
+SLIDE 1: Slide 1: Title & Academic Metadata (Candidate, Guide, University, Program)
+--------------------------------------------------------------------------------
+Good morning respected evaluators and faculty. Today I present my deep learning project: 'Network Intrusion Detection Using Autoencoder'. In this work, we address cyber threat detection as an unsupervised anomaly detection task on the NSL-KDD benchmark, training exclusively on normal traffic to detect intrusions based on reconstruction error.
+Key Takeaway: A leakage-free, unsupervised deep learning framework for network intrusion detection.
+
+--------------------------------------------------------------------------------
+SLIDE 2: Slide 2: Problem Statement (Signature vs Anomaly Detection, Supervised vs Unsupervised)
+--------------------------------------------------------------------------------
+Here we contrast traditional signature-based NIDS with anomaly detection. Signature-based tools and supervised classifiers struggle when facing novel attacks or unlabeled data. Our project asks: can an Autoencoder learn only normal traffic and flag anomalies via reconstruction failure?
+Key Takeaway: Anomaly detection shifts the paradigm from chasing attack signatures to establishing a normal baseline.
+
+--------------------------------------------------------------------------------
+SLIDE 3: Slide 3: Project Motivation (Threat Evolution, Abundant Normal Data, One-Class Training, Objective Metric)
+--------------------------------------------------------------------------------
+Our motivation rests on four pillars: attacks evolve, normal data is abundant, one-class training avoids attack bias, and reconstruction error provides an objective anomaly signal. We emphasize that this approach does not guarantee detection of every stealthy intrusion, but reliably flags traffic that deviates statistically from normal baselines.
+Key Takeaway: Normal network traffic offers a rich, self-supervised learning signal for anomaly detection.
+
+--------------------------------------------------------------------------------
+SLIDE 4: Slide 4: Project Objectives (Preprocessing, Architecture, Training, Threshold, Evaluation, Deployment)
+--------------------------------------------------------------------------------
+Here are our six core objectives spanning the entire machine learning lifecycle: leakage-free preprocessing, deep autoencoder modeling, normal-only training, validation-calibrated thresholding, comprehensive benchmark testing, and an operational web demonstration.
+Key Takeaway: Clear, verifiable objectives bridging theoretical modeling and practical cybersecurity deployment.
+
+--------------------------------------------------------------------------------
+SLIDE 5: Slide 5: Dataset NSL-KDD (KDDTrain+, KDDTest+, 41 Features, Label Distribution Plot)
+--------------------------------------------------------------------------------
+Slide 5 presents the NSL-KDD dataset. KDDTrain+ contains 125,973 records, while KDDTest+ contains 22,544 records. The chart on the right shows the verified distribution between normal traffic and attack categories. Crucially, the 41 network traffic features were separated from labels and difficulty scores before any modeling.
+Key Takeaway: NSL-KDD provides an established benchmark with realistic feature diversity and novel test attacks.
+
+--------------------------------------------------------------------------------
+SLIDE 6: Slide 6: Data Preprocessing Pipeline (One-Hot, Scaler, ColumnTransformer, Zero-Leakage)
+--------------------------------------------------------------------------------
+Slide 6 illustrates our leakage-free preprocessing pipeline. OneHotEncoder processes the 3 categorical attributes, while StandardScaler scales the 38 numerical features. The ColumnTransformer was fitted strictly on normal training data (X_train_normal). Validation and test sets were transformed only, ensuring zero future information leaked into the model.
+Key Takeaway: Methodological rigor prevents optimistic bias by fitting preprocessors exclusively on training data.
+
+--------------------------------------------------------------------------------
+SLIDE 7: Slide 7: Proposed Methodology (Telemetry -> Preprocessing -> Autoencoder -> MSE -> Threshold)
+--------------------------------------------------------------------------------
+Slide 7 walks through the end-to-end detection workflow. Raw telemetry is preprocessed into 77 dimensions, passed to the Autoencoder, and reconstructed. The per-sample Mean Squared Error measures reconstruction failure. If error exceeds the threshold of 0.1291, an intrusion alert is triggered; otherwise, it is classified as normal.
+Key Takeaway: An elegant, fully automated pipeline from raw network packet telemetry to binary alert decision.
+
+--------------------------------------------------------------------------------
+SLIDE 8: Slide 8: Autoencoder Architecture (77 -> 64 -> 32 -> 16 -> 32 -> 64 -> 77, 15,261 Params)
+--------------------------------------------------------------------------------
+Slide 8 displays our confirmed Dense Autoencoder architecture. Starting with 77 inputs, the encoder compresses through 64 and 32 neurons down to a 16-dimensional bottleneck—a 79.2% compression ratio. The decoder symmetrically expands back to 77 linear output neurons. Total trainable parameters are exactly 15,261, optimized using Adam and MSE loss.
+Key Takeaway: The 16-neuron latent bottleneck acts as a compression barrier, preventing anomalies from reconstructing.
+
+--------------------------------------------------------------------------------
+SLIDE 9: Slide 9: Training Loss Curve & Normal Validation Threshold Calibration (P95 = 0.129075)
+--------------------------------------------------------------------------------
+Slide 9 demonstrates model training and threshold calibration. On the left, the loss curve shows smooth convergence down to a validation loss of 0.3138 at epoch 8 before early stopping. On the right, we plot the reconstruction error histogram on normal validation records. The threshold of 0.129075 was calibrated as the 95th percentile, mathematically fixing the expected false positive rate to ~5%.
+Key Takeaway: The threshold is grounded in validation error percentiles rather than an arbitrary heuristic cutoff.
+
+--------------------------------------------------------------------------------
+SLIDE 10: Slide 10: Reconstruction Error Analysis (144.9x Median Separation, Distribution Plot)
+--------------------------------------------------------------------------------
+Slide 10 highlights the core anomaly detection signal. The median reconstruction error for attack traffic (0.4576) is 144.9 times higher than normal traffic (0.0032). The log-scale distribution plot confirms clean separation: normal traffic concentrates heavily to the left of the green threshold line, while the attack distribution shifts decisively to the right.
+Key Takeaway: The autoencoder reliably discriminates anomalies due to massive reconstruction error disparities.
+
+--------------------------------------------------------------------------------
+SLIDE 11: Slide 11: Final Model Performance (Accuracy 83.35%, Precision 96.05%, Recall 73.79%, ROC-AUC 95.70%)
+--------------------------------------------------------------------------------
+Slide 11 summarizes our official test metrics on KDDTest+. The model achieves 83.35% accuracy, an exceptional 96.05% precision, 73.79% recall, and 95.70% ROC-AUC. Crucially, the False Positive Rate is only 4.01%, validating that our 95th percentile validation threshold successfully constrained false alarms in unseen test traffic.
+Key Takeaway: High precision (96.05%) prevents alert fatigue while maintaining strong detection capability.
+
+--------------------------------------------------------------------------------
+SLIDE 12: Slide 12: Confusion Matrix & ROC Curve (TN=9,322, FP=389, FN=3,364, TP=9,469, AUC=95.70%)
+--------------------------------------------------------------------------------
+Slide 12 presents the confusion matrix and ROC curve. On the left, out of 22,544 test connections, we correctly identify 9,322 True Negatives and 9,469 True Positives, with only 389 False Positives. On the right, the ROC curve shows an AUC of 95.70%, with the red dot marking our official operating point at FPR=4.01%, TPR=73.79%.
+Key Takeaway: Strong global discriminative power reflected by an ROC-AUC of 95.70%.
+
+--------------------------------------------------------------------------------
+SLIDE 13: Slide 13: Attack-Family Diagnostics (DoS 84.37%, Probe 81.54%, U2R 65.67%, R2L 40.15%)
+--------------------------------------------------------------------------------
+Slide 13 breaks down performance across attack families. DoS and Probe are detected reliably at 84.4% and 81.5% because flooding and scanning disrupt host connection rates. In contrast, R2L is the hardest category at 40.15% detection, representing 51.4% of all missed attacks. This occurs because password guessing over valid sessions mimics legitimate telemetry in header metadata.
+Key Takeaway: Volumetric and scanning threats are detected easily, while content-based R2L intrusions reveal feature limitations.
+
+--------------------------------------------------------------------------------
+SLIDE 14: Slide 14: Streamlit Application (Single Record, Batch CSV, Top-5 Deviations, Benchmark Demo)
+--------------------------------------------------------------------------------
+Slide 14 outlines our Streamlit web application. The system offers single-record analysis with 5 pre-loaded attack presets, batch CSV processing with live throughput, and real-time explainability highlighting the top 5 reconstruction deviations. Importantly, the UI clarifies that reconstruction error is an anomaly measure, not a calibrated attack probability.
+Key Takeaway: Operational prototype enabling interactive viva demonstration and batch telemetry processing.
+
+--------------------------------------------------------------------------------
+SLIDE 15: Slide 15: Conclusions & Future Scope (Key Findings, DPI Integration, Sequential Modeling, Evaluation on Modern Benchmarks)
+--------------------------------------------------------------------------------
+In conclusion, we have demonstrated that an unsupervised Dense Autoencoder can detect network intrusions with 83.35% accuracy, 96.05% precision, and an ROC-AUC of 95.70% on unseen benchmark traffic. For future work, incorporating payload inspection and sequential modeling will address R2L payload blindspots. Thank you, and I am now ready for questions.
+Key Takeaway: A successful, mathematically verified proof-of-concept for unsupervised deep learning intrusion detection.
+

@@ -1,0 +1,50 @@
+{
+    "original_feature_count": 41,
+    "categorical_features": [
+        "protocol_type",
+        "service",
+        "flag"
+    ],
+    "categorical_feature_count": 3,
+    "numerical_feature_count": 38,
+    "ohe_expanded_feature_count": 39,
+    "processed_feature_count": 77,
+    "splits": {
+        "train_normal_count": 53874,
+        "val_normal_count": 13469,
+        "test_count": 22544,
+        "train_normal_pct": 80.0,
+        "val_normal_pct": 20.0
+    },
+    "shapes": {
+        "X_train_processed": [
+            53874,
+            77
+        ],
+        "X_val_processed": [
+            13469,
+            77
+        ],
+        "X_test_processed": [
+            22544,
+            77
+        ]
+    },
+    "integrity": {
+        "train_nan": 0,
+        "train_inf": 0,
+        "val_nan": 0,
+        "val_inf": 0,
+        "test_nan": 0,
+        "test_inf": 0
+    },
+    "dtype": "float32",
+    "preprocessor_artifact": "E:\\NIDA\\models\\preprocessor.joblib",
+    "random_state": 42,
+    "leakage_prevention": {
+        "fit_data": "X_train_normal only (normal records from KDDTrain+, 80% split)",
+        "val_transform": "transform() only \u2014 no fit()",
+        "test_transform": "transform() only \u2014 no fit()",
+        "threshold_source": "NOT YET \u2014 deferred to Phase 8 (validation errors only)"
+    }
+}

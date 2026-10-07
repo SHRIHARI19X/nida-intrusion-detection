@@ -1,0 +1,42 @@
+{
+    "method": "95th_percentile",
+    "threshold": 0.1290749317,
+    "source": "normal_validation_reconstruction_errors",
+    "data_source_file": "results/validation_reconstruction_errors.npy",
+    "validation_sample_count": 13469,
+    "p90": 0.0665455868,
+    "p95": 0.1290749317,
+    "p99": 0.4268380176,
+    "classification_rule": {
+        "normal": "reconstruction_error <= 0.1290749317",
+        "intrusion": "reconstruction_error >  0.1290749317"
+    },
+    "sensitivity_analysis": {
+        "P90": {
+            "threshold": 0.06654559,
+            "n_above": 1347,
+            "pct_above": 10.0
+        },
+        "P95 (official)": {
+            "threshold": 0.12907493,
+            "n_above": 674,
+            "pct_above": 5.0
+        },
+        "P99": {
+            "threshold": 0.42683802,
+            "n_above": 135,
+            "pct_above": 1.0
+        }
+    },
+    "normal_val_above_threshold": {
+        "count": 674,
+        "percentage": 5.0041,
+        "note": "~5% of normal validation records exceed P95 by construction. Final false-positive rate will be measured on KDDTest+ in Phase 10."
+    },
+    "data_integrity": {
+        "test_data_used": false,
+        "test_labels_used": false,
+        "attack_records_used": false,
+        "threshold_source": "normal validation records from KDDTrain+ 20% split only"
+    }
+}

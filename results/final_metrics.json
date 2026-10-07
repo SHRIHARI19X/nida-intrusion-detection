@@ -1,0 +1,96 @@
+{
+    "accuracy": 0.833526,
+    "precision": 0.96054,
+    "recall": 0.737863,
+    "f1_score": 0.834604,
+    "roc_auc": 0.95696,
+    "tn": 9322,
+    "fp": 389,
+    "fn": 3364,
+    "tp": 9469,
+    "false_positive_rate": 0.040058,
+    "specificity": 0.959942,
+    "attack_detection_rate": 0.737863,
+    "threshold": 0.1290749317,
+    "threshold_source": "normal_validation_reconstruction_errors",
+    "test_sample_count": 22544,
+    "normal_test_count": 9711,
+    "attack_test_count": 12833,
+    "model_path": "E:\\NIDA\\models\\autoencoder.keras",
+    "preprocessor_path": "E:\\NIDA\\models\\preprocessor.joblib",
+    "reconstruction_error_statistics": {
+        "normal": {
+            "mean": 0.03854,
+            "median": 0.003158,
+            "p90": 0.070016,
+            "p95": 0.112638,
+            "p99": 0.420978,
+            "max": 63.669305
+        },
+        "attack": {
+            "mean": 0.963125,
+            "median": 0.457592,
+            "p90": 1.335228,
+            "p95": 1.578233,
+            "p99": 1.874365,
+            "max": 447.47127
+        }
+    },
+    "per_category_performance": {
+        "DoS": {
+            "total_records": 7458,
+            "correctly_detected": 6292,
+            "missed_attacks": 1166,
+            "detection_rate_pct": 84.37,
+            "mean_reconstruction_error": 0.651147
+        },
+        "Probe": {
+            "total_records": 2421,
+            "correctly_detected": 1974,
+            "missed_attacks": 447,
+            "detection_rate_pct": 81.54,
+            "mean_reconstruction_error": 0.746501
+        },
+        "R2L": {
+            "total_records": 2887,
+            "correctly_detected": 1159,
+            "missed_attacks": 1728,
+            "detection_rate_pct": 40.15,
+            "mean_reconstruction_error": 1.270411
+        },
+        "U2R": {
+            "total_records": 67,
+            "correctly_detected": 44,
+            "missed_attacks": 23,
+            "detection_rate_pct": 65.67,
+            "mean_reconstruction_error": 30.277333
+        }
+    },
+    "classification_report": {
+        "NORMAL": {
+            "precision": 0.7348257922118872,
+            "recall": 0.9599423334363093,
+            "f1-score": 0.832432915122561,
+            "support": 9711.0
+        },
+        "INTRUSION": {
+            "precision": 0.9605396632176912,
+            "recall": 0.737863321125224,
+            "f1-score": 0.8346040280287339,
+            "support": 12833.0
+        },
+        "accuracy": 0.8335255500354861,
+        "macro avg": {
+            "precision": 0.8476827277147891,
+            "recall": 0.8489028272807666,
+            "f1-score": 0.8335184715756474,
+            "support": 22544.0
+        },
+        "weighted avg": {
+            "precision": 0.8633116911924356,
+            "recall": 0.8335255500354861,
+            "f1-score": 0.8336688045798409,
+            "support": 22544.0
+        }
+    }
+}

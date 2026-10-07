@@ -1,0 +1,18 @@
+# Python bytecode / environment
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+ENV/
+env/
+.env
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Streamlit temporary state
+.streamlit/secrets.toml

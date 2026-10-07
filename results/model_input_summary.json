@@ -1,0 +1,58 @@
+{
+    "phase": "Phase 4 \u2014 Model-Ready Normal Data Verification",
+    "training": {
+        "sample_count": 53874,
+        "feature_count": 77,
+        "shape": [
+            53874,
+            77
+        ],
+        "dtype": "float32",
+        "source": "KDDTrain+ \u2014 normal records only (binary_label==0), 80% split, random_state=42",
+        "reconstruction_target": "X_train_processed (self \u2014 reconstruction task)",
+        "contains_normal_only": true
+    },
+    "validation": {
+        "sample_count": 13469,
+        "feature_count": 77,
+        "shape": [
+            13469,
+            77
+        ],
+        "dtype": "float32",
+        "source": "KDDTrain+ \u2014 normal records only (binary_label==0), 20% split, random_state=42",
+        "reconstruction_target": "X_val_processed (self \u2014 reconstruction task)",
+        "contains_normal_only": true
+    },
+    "test": {
+        "sample_count": 22544,
+        "feature_count": 77,
+        "shape": [
+            22544,
+            77
+        ],
+        "dtype": "float32",
+        "source": "KDDTest+ \u2014 full dataset, both normal and attack records",
+        "labels_source": "y_test binary labels retained separately for evaluation only",
+        "test_normal_count": 9711,
+        "test_attack_count": 12833
+    },
+    "processed_feature_count": 77,
+    "integrity": {
+        "total_nan": 0,
+        "total_inf": 0,
+        "status": "CLEAN"
+    },
+    "contamination_audit": {
+        "training_data_normal_only": true,
+        "validation_data_normal_only": true,
+        "attack_test_records_not_in_training": true,
+        "test_labels_not_used_in_training": true,
+        "test_records_not_used_for_threshold": true,
+        "preprocessor_fitted_only_on_train": true,
+        "feature_dimensions_consistent": true
+    },
+    "preprocessor_artifact": "E:\\NIDA\\models\\preprocessor.joblib",
+    "random_state": 42,
+    "ready_for_phase5": true
+}

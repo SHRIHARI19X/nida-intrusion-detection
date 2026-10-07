@@ -1,0 +1,95 @@
+================================================================================
+VIVA & DEMONSTRATION PRACTICAL CHECKLIST
+================================================================================
+Project: Network Intrusion Detection Using Autoencoder
+Dataset: NSL-KDD
+Model  : Dense Autoencoder (77 -> 64 -> 32 -> 16 -> 32 -> 64 -> 77)
+
+This step-by-step checklist outlines the ideal sequence for demonstrating the
+project during project defense, academic viva, or presentation sessions.
+
+--------------------------------------------------------------------------------
+DEMONSTRATION SEQUENCE (13 STEPS)
+--------------------------------------------------------------------------------
+
+[ ] STEP 1: Launch Application
+    - Command: streamlit run app/streamlit_app.py
+    - Highlight the clean cybersecurity dashboard UI, sidebar navigation, and
+      frozen official parameters (Threshold: 0.12907493, Parameters: 15,261).
+
+[ ] STEP 2: Explain Model Architecture
+    - Navigate to: "🧠 Model Architecture" in the sidebar.
+    - Explain the symmetric compression: 77 -> 64 -> 32 -> 16 -> 32 -> 64 -> 77.
+    - Note that the 16-dimensional bottleneck forces the network to learn only the
+      most essential correlations of benign network traffic.
+    - Emphasize that training used ONLY normal traffic (unsupervised one-class learning).
+
+[ ] STEP 3: Demonstrate Normal Traffic Analysis
+    - Navigate to: "🔍 Single Record Detection".
+    - Click preset button: "🟢 Typical Normal (HTTP)".
+    - Click: "⚡ Analyze Network Traffic".
+    - Point out: Reconstruction MSE (~0.0017) is far below the threshold (0.129075).
+    - Status badge confirms: "NORMAL TRAFFIC".
+
+[ ] STEP 4: Demonstrate Intrusion / Attack Detection
+    - In "🔍 Single Record Detection", click preset: "🔴 Neptune SYN Flood (DoS)".
+    - Click: "⚡ Analyze Network Traffic".
+    - Point out: Reconstruction MSE (~1.4425) is significantly above the threshold.
+    - Status badge triggers: "🚨 INTRUSION DETECTED".
+
+[ ] STEP 5: Explain the Reconstruction Error Concept
+    - Explain that the Autoencoder reconstructs inputs based on normal traffic rules.
+    - Attack traffic exhibits abnormal connection distributions that fail compression,
+      causing a large Mean Squared Reconstruction Error (MSE).
+    - Clarify: "Reconstruction error is a continuous anomaly measure, not a calibrated probability."
+
+[ ] STEP 6: Explain the Anomaly Threshold Calibration
+    - Explain that 0.12907493 was NOT an arbitrary guess.
+    - It was derived as the 95th percentile of reconstruction errors on normal
+      validation data (Phase 8), establishing an empirical reference false-positive
+      rate of ~5% on benign traffic.
+
+[ ] STEP 7: Show Top Reconstruction Deviations (Explainability)
+    - Scroll to: "Reconstruction-Based Anomaly Indicators (Top 5 Deviations)".
+    - Show which features contributed the largest reconstruction error for the alert
+      (e.g., serror_rate, count, dst_host_serror_rate for Neptune).
+    - State: "These highlight where the input deviated most from learned normal patterns."
+
+[ ] STEP 8: Demonstrate Batch CSV Detection
+    - Navigate to: "📁 Batch CSV Detection".
+    - Click: "📥 Download 25-Row Sample CSV", then immediately drag-and-drop it into the uploader.
+    - Show the real-time processing throughput (>5,000 req/s on CPU).
+    - Show the summary cards: Total records, Normal passed, Intrusions detected.
+    - Demonstrate filtering ("Intrusions Only") and the "Download Full Predictions CSV" button.
+
+[ ] STEP 9: Review the Confusion Matrix
+    - Navigate to: "📊 Validated Performance".
+    - Open tab: "Confusion Matrix Heatmap".
+    - Highlight the exact counts on all 22,544 test records:
+      * True Negatives (TN): 9,322 (95.99% Specificity)
+      * False Positives (FP): 389 (only 4.01% FPR)
+      * False Negatives (FN): 3,364
+      * True Positives (TP): 9,469 (73.79% Detection Recall)
+
+[ ] STEP 10: Review the ROC Curve
+    - In "📊 Validated Performance", open tab: "ROC Curve".
+    - Highlight the ROC-AUC score of 95.70%, computed using continuous per-sample MSE scores.
+    - Point out the red operating point at FPR = 4.01%, TPR = 73.79%.
+
+[ ] STEP 11: Explain Attack-Family Results
+    - Explain detection recall variation across attack families:
+      * DoS (84.37% detected): Volumetric floods disrupt traffic rates -> massive MSE.
+      * Probe (81.54% detected): Scanning violates host port distributions -> high MSE.
+      * U2R (65.67% detected): Privilege escalation produces extreme statistical anomalies.
+      * R2L (40.15% detected): Password guessing occurs within valid user sessions,
+        making it the hardest category for header-based statistical models.
+
+[ ] STEP 12: Discuss Realistic Model Limitations
+    - Acknowledge that the tabular NSL-KDD schema records connection headers, not deep packet payloads.
+    - Attacks mimicking authorized interactive logins (R2L) pass through without large rate deviations.
+
+[ ] STEP 13: Outline Future Technical Improvements
+    - Combining the Autoencoder with a deep packet inspection (DPI) payload classifier.
+    - Incorporating sequential temporal modeling (LSTM / Transformer) for multi-step attacks.
+    - Using service-specific adaptive thresholding rather than a single global cutoff.
+================================================================================
